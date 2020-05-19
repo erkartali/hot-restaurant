@@ -17,41 +17,45 @@ var waitList = [];
 
 //routes
 //homepage
-app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "index.html"));
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 //reservepage
-app.get("/reserve", function(req, res) {
-    res.sendFile(path.join(__dirname, "reserve.html"));
+app.get("/reserve", function (req, res) {
+  res.sendFile(path.join(__dirname, "reserve.html"));
 });
 //tables page
-app.get("/tables", function(req, res) {
-    res.sendFile(path.join(__dirname, "tables.html"));
+app.get("/tables", function (req, res) {
+  res.sendFile(path.join(__dirname, "tables.html"));
 });
 //all reservations
-app.get("/api/reservations", function(req, res) {
-    return res.json(reservations);
+app.get("/api/reservations", function (req, res) {
+  return res.json(reservations);
 });
-//all reservations
-app.get("/api/waitList", function(req, res) {
-    return res.json(waitList);
+//all on the wait list
+app.get("/api/waitList", function (req, res) {
+  return res.json(waitList);
 });
 // Create New Characters - takes in JSON input
-app.post("/api/reservations", function(req, res) {
-    // req.body hosts is equal to the JSON post sent from the user
-    // This works because of our body parsing middleware
-    var newReservation = req.body;
+app.post("/api/reservations", function (req, res) {
+  // req.body hosts is equal to the JSON post sent from the user
+  // This works because of our body parsing middleware
 
-    console.log(newReservation);
-
+  var newReservation = req.body;
+  console.log(reservations.length);
+  if (reservations.length <= 5) {
     reservations.push(newReservation);
-
     res.json(newReservation);
-  });
+    console.log(`new reservations: ${newReservation}`)
+  } else {
+    waitList.push(newReservation);
+    res.json(newReservation);
+    console.log(`wait list: ${waitList}`)
+  }
+});
 
-  // Starts the server to begin listening
+// Starts the server to begin listening
 // =============================================================
-app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
-  });
-  
+app.listen(PORT, function () {
+  console.log("App listening on PORT " + PORT);
+});
