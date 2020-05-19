@@ -62,14 +62,12 @@
 	<script type="text/javascript">
 
 		function queryReservation(){
-		  app.get("/api/reservations", function(req, res) {
+		  app.get("/tables", function(req, res) {
     		return res.json(reservations);
-			if (data) {
-			  $("#stats").show();
-			  $("#data").text(data.name);
-			  //$("#role").text(data.role);
-			  //$("#age").text(data.age);
-			  //$("#force-points").text(data.forcePoints);
+			if (res) {
+			  $("#tableSelection").show();
+			  $("#tableSelection").text(data.id);
+			  $("#tableSelection").text(data.name);
 			} else {
 			  $("#data").text(
 				"The force is not strong with this one. Your character was not found.");
