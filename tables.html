@@ -31,8 +31,9 @@
 
 				<!-- Current Tables in Use -->
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div class="panel-heading" id="reservations">
 						<h4 class="panel-title">Current Reservations</h4>
+						<h4 class="panel-title"><span id="data"></span></h4>
 					</div>
 					<div class="panel-body" id="tableSection">
 					</div>
@@ -58,5 +59,25 @@
 	    </footer>
 
 	</div>
+	<script type="text/javascript">
 
+		function queryReservation(){
+		  app.get("/api/reservations", function(req, res) {
+    		return res.json(reservations);
+			if (data) {
+			  $("#stats").show();
+			  $("#data").text(data.name);
+			  //$("#role").text(data.role);
+			  //$("#age").text(data.age);
+			  //$("#force-points").text(data.forcePoints);
+			} else {
+			  $("#data").text(
+				"The force is not strong with this one. Your character was not found.");
+			  //$("#stats").hide();
+			}
+		  });
+		};
+		//Call query
+		queryReservation()
+	  </script>
 </body>
