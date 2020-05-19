@@ -42,7 +42,12 @@ app.post("/api/reservations", function(req, res) {
     // This works because of our body parsing middleware
     var newReservation = req.body;
 
-    
+    console.log(newReservation);
+
+    reservations.push(newReservation);
+
+    res.json(newReservation);
+
   });
 
   // Starts the server to begin listening
