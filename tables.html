@@ -60,24 +60,29 @@
 
 	</div>
 	<script type="text/javascript">
-
-		function queryReservation(){
-		  app.get("/api/reservations", function(req, res) {
-    		return res.json(reservations);
-			if (data) {
-			  $("#stats").show();
-			  $("#data").text(data.name);
-			  //$("#role").text(data.role);
-			  //$("#age").text(data.age);
-			  //$("#force-points").text(data.forcePoints);
-			} else {
-			  $("#data").text(
-				"The force is not strong with this one. Your character was not found.");
-			  //$("#stats").hide();
+		
+		  $.get("/api/reservations", function(res) {
+			console.log("response!")
+			console.log(res)
+			var resTable = $("#tableSection")
+			for (var i = 0; i < res.length; i++) {
+				var header = $("<h2>").text(res[i].name)
+					var span = $("<span>").text(res[i].id)
+						header.append(span)
+						resTable.append(header)
 			}
 		  });
-		};
-		//Call query
-		queryReservation()
+		  $.get("/api/waitList", function(res) {
+			console.log("response2!")
+			console.log(res)
+			var resTable = $("#waitlistSection")
+			for (var i = 0; i < res.length; i++) {
+				var header = $("<h2>").text(res[i].name)
+				var span = $("<span>").text(res[i].id)
+					header.append(span)
+					resTable.append(header)
+			}
+		  });
+	
 	  </script>
 </body>
