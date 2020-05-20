@@ -43,7 +43,7 @@ app.post("/api/reservations", function (req, res) {
 
   var newReservation = req.body;
   console.log(reservations.length);
-  if (reservations.length <= 5) {
+  if (reservations.length <= 4) {
     reservations.push(newReservation);
     res.json(newReservation);
     console.log(`new reservations: ${newReservation}`)
